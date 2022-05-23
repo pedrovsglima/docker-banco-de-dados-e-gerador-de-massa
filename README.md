@@ -1,0 +1,2 @@
+# docker-banco-de-dados-e-gerador-de-massa
+Atividade proposta durante a participação na trilha de Engenharia de Dados do Programa de Formação em Dados Encantech, realizado durante os meses de Março, Abril e Maio de 2022, em uma parceria entre as Lojas Renner S.A. e a CESAR School. Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB. Uma base de dados é proposta e se faz necessário a criação de um script gerador de massa.
