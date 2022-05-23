@@ -6,7 +6,7 @@ Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB.
 
 É preciso criar um script gerador de massa considerando o seguinte modelo:
 
--- add imagem --
+![alt text](https://github.com/peuvitor/docker-banco-de-dados-e-gerador-de-massa/blob/main/modelo-bd.png)
 
 
 ## Diferentes formas de rodar os scripts SQL no docker criado
@@ -91,5 +91,6 @@ Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB.
 docker cp <src> nomecontainer:<dst>
 
 ex:
+	
 docker cp ./create-script.sql <NOME-DO-DOCKER>:/var/lib/mysql
 
