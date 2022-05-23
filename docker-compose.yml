@@ -1,0 +1,11 @@
+version: '3.1'
+
+services:
+        cesar-renner:
+                image: mariadb
+                container_name: mariadb-renner
+                environment:
+                        - MARIADB_ROOT_PASSWORD=cesar
+                        - MARIADB_DATABASE=FACULDADE
+                volumes:
+                        - ./scripts_sql:/var/lib/mysql
