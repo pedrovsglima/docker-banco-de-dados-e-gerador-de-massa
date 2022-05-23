@@ -23,7 +23,7 @@ Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB.
 
 3. executar docker
 
-	docker exec -i <NOME-DO-DOCKER> mysql -u root -p<SENHA> < <NOME-DO-ARQUIVO>.sql
+	docker exec -i \<NOME-DO-DOCKER\> mysql -u root -p\<SENHA\> < \<NOME-DO-ARQUIVO\>.sql
 
 	docker exec -i mariadb-renner mysql -u root -pcesar < scripts_sql/DDL_init.sql
 
@@ -42,7 +42,7 @@ Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB.
 
 3. executar docker
 
-	docker exec -it <NOME-DO-DOCKER> bash
+	docker exec -it \<NOME-DO-DOCKER\> bash
 
 	docker exec -it mariadb-renner bash
 
@@ -67,7 +67,7 @@ Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB.
 
 3. executar docker
 
-	docker exec -it <NOME-DO-DOCKER> bash
+	docker exec -it \<NOME-DO-DOCKER\> bash
 
 	docker exec -it mariadb-renner bash
 
@@ -88,9 +88,9 @@ Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB.
 
 ### OBS: MOVER ARQUIVO PARA O CONTAINER (RODAR ANTES DE ENTRAR NO CONTAINER)
 
-docker cp <src> nomecontainer:<dst>
+docker cp \<src\> nomecontainer:\<dst\>
 
 ex:
 	
-docker cp ./create-script.sql <NOME-DO-DOCKER>:/var/lib/mysql
+docker cp ./create-script.sql \<NOME-DO-DOCKER\>:/var/lib/mysql
 
