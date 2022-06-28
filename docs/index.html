@@ -1,0 +1,67 @@
+<h1 id="docker-banco-de-dados-e-gerador-de-massa">Docker, banco de dados e gerador de massa</h1>
+<p>Atividade proposta durante a participação na trilha de Engenharia de Dados do Programa de Formação em Dados Encantech, realizado durante os meses de Março, Abril e Maio de 2022, em uma parceria entre as Lojas Renner S.A. e a CESAR School. </p>
+<p>Consiste na criação de um docker a partir de uma imagem do SGBD MariaDB. </p>
+<p>É preciso criar um script gerador de massa considerando o seguinte modelo:</p>
+<p><img src="https://github.com/peuvitor/docker-banco-de-dados-e-gerador-de-massa/blob/main/modelo-bd.png?raw=true" class="center"></p>
+<p><a href="https://github.com/peuvitor/docker-banco-de-dados-e-gerador-de-massa">acesso aos arquivos</a></p>
+<p><strong>Autor:</strong> Pedro Vitor Soares Gomes de Lima</p>
+<h2 id="diferentes-formas-de-rodar-os-scripts-sql-no-docker-criado">Diferentes formas de rodar os scripts SQL no docker criado</h2>
+<h3 id="alternativa-1-criar-docker-e-rodar-arquivo-sql-sem-precisar-entrar">ALTERNATIVA 1: CRIAR DOCKER E RODAR ARQUIVO .SQL SEM PRECISAR ENTRAR</h3>
+<ol>
+<li><p>criar arquivo .yml</p>
+<p> ver arquivo &#39;docker-compose.yml&#39;</p>
+</li>
+<li><p>criar docker a partir do arquivo</p>
+<p> docker-compose -f ./docker-compose.yml up -d</p>
+</li>
+<li><p>executar docker</p>
+<p> docker exec -i &lt;NOME-DO-DOCKER&gt; mysql -u root -p&lt;SENHA&gt; &lt; &lt;NOME-DO-ARQUIVO&gt;.sql</p>
+<p> docker exec -i mariadb-renner mysql -u root -pcesar &lt; scripts_sql/DDL_init.sql</p>
+</li>
+</ol>
+<p><em>OBS: rodar os scripts de fora do container evita de &quot;superlotar&quot; o conteúdo interno</em></p>
+<h3 id="alternativa-2-criar-e-entrar-no-docker-para-rodar-arquivo-sql">ALTERNATIVA 2: CRIAR E ENTRAR NO DOCKER PARA RODAR ARQUIVO .SQL</h3>
+<ol>
+<li><p>criar arquivo .yml</p>
+<p> ver arquivo &#39;docker-compose.yml&#39;</p>
+</li>
+<li><p>criar docker a partir do arquivo</p>
+<p> docker-compose -f ./docker-compose.yml up -d</p>
+</li>
+<li><p>executar docker</p>
+<p> docker exec -it &lt;NOME-DO-DOCKER&gt; bash</p>
+<p> docker exec -it mariadb-renner bash</p>
+</li>
+<li><p>rodar scripts DDL e DML (sem acessar console do SGBD) - usar caminho do arquivo .yml em &#39;volumes&#39;</p>
+<p> mysql -u root -pcesar FACULDADE &lt; /var/lib/mysql/DDL_init.sql</p>
+<p> mysql -u root -pcesar FACULDADE &lt; /var/lib/mysql/DML_TITULACAO.sql</p>
+<p> mysql -u root -pcesar FACULDADE &lt; /var/lib/mysql/DML_FUNCIONARIO_PROFESSOR.sql</p>
+</li>
+</ol>
+<h3 id="alternativa-3-criar-docker-e-entrar-no-console-do-sgbd-para-rodar-arquivo-sql">ALTERNATIVA 3: CRIAR DOCKER E ENTRAR NO CONSOLE DO SGBD PARA RODAR ARQUIVO .SQL</h3>
+<ol>
+<li><p>criar arquivo .yml</p>
+<p> ver arquivo &#39;docker-compose.yml&#39;</p>
+</li>
+<li><p>criar docker a partir do arquivo</p>
+<p> docker-compose -f ./docker-compose.yml up -d</p>
+</li>
+<li><p>executar docker</p>
+<p> docker exec -it &lt;NOME-DO-DOCKER&gt; bash</p>
+<p> docker exec -it mariadb-renner bash</p>
+</li>
+<li><p>acessar o console do SGBD (vai pedir senha)</p>
+<p> mysql -u root -p</p>
+</li>
+<li><p>criar database e tabelas - usar caminho do arquivo .yml em &#39;volumes&#39;</p>
+<p> source /var/lib/mysql/DDL_init.sql</p>
+</li>
+<li><p>popular a partir do script .sql - usar caminho do arquivo .yml em &#39;volumes&#39;</p>
+<p> source /var/lib/mysql/DML_TITULACAO.sql</p>
+<p> source /var/lib/mysql/DML_FUNCIONARIO_PROFESSOR.sql</p>
+</li>
+</ol>
+<h3 id="obs-mover-arquivo-para-o-container-rodar-antes-de-entrar-no-container-">OBS: MOVER ARQUIVO PARA O CONTAINER (RODAR ANTES DE ENTRAR NO CONTAINER)</h3>
+<p>docker cp &lt;src&gt; nomecontainer:&lt;dst&gt;</p>
+<p>ex:</p>
+<p>docker cp ./create-script.sql \<NOME-DO-DOCKER\>:/var/lib/mysql</p>
